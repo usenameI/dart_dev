@@ -1,0 +1,25 @@
+name: mobile_dev
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  pro_mana: 
+    path: ../../../pro_mana
+  get: ^4.6.6
+  tdesign_flutter: ^0.1.7
+  font_awesome_flutter: ^10.8.0
+  flutter_map: ^7.0.2
+  flutter_map_location_marker: ^9.1.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

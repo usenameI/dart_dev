@@ -1,0 +1,37 @@
+name: web_dev
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #状态管理
+  provider: ^6.1.2
+  fluent_ui: ^4.9.2
+  #windows风格跳转路由
+  go_router: ^10.0.0
+  # 网络请求库
+  dio: ^5.7.0
+  # 腾讯组件库
+  tdesign_flutter: ^0.1.6
+  # 取本地文件
+  file_picker: ^8.1.2
+  pro_mana:
+    path: ../../../pro_mana
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+# flutter:
+#   fonts:
+#     - family: Roboto
+#       fonts:
+#         - asset: assets/fonts/Roboto-Regular.ttf

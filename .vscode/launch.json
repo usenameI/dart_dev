@@ -1,0 +1,28 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "前端启动",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "flutterMode": "debug",
+
+        },
+        {
+            "name": "后端启动",
+            "request": "launch",
+            "type": "dart",
+            "program": "bin/main.dart",
+            "args": [
+                "--verbose"
+              ]
+        },
+   
+     
+    ]
+}

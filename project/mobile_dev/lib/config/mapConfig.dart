@@ -1,0 +1,26 @@
+class mapConfig {
+  static String backGround = 'http://t0.tianditu.gov.cn/vec_w/wmts?'
+      'SERVICE=WMTS'
+      '&REQUEST=GetTile'
+      '&VERSION=1.0.0'
+      '&LAYER=vec'
+      '&STYLE=default'
+      '&TILEMATRIXSET=w'
+      '&FORMAT=tiles'
+      '&TILEMATRIX={z}'
+      '&TILEROW={y}'
+      '&TILECOL={x}'
+      '&tk=0b8336288626376c6044f5c560168e06';
+  static String street = 'http://t0.tianditu.gov.cn/cva_w/wmts?'
+      'SERVICE=WMTS'
+      '&REQUEST=GetTile'
+      '&VERSION=1.0.0'
+      '&LAYER=cva'
+      '&STYLE=default'
+      '&TILEMATRIXSET=w'
+      '&FORMAT=tiles'
+      '&TILEMATRIX={z}'
+      '&TILEROW={y}'
+      '&TILECOL={x}'
+      '&tk=0b8336288626376c6044f5c560168e06';
+}
