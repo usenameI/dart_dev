@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
@@ -33,14 +35,7 @@ class _sports extends State<sports> {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      getLocation.checkLocationPermission().then((value) {
-        if (value) {
-          ///获取当前的位置
-          getLocation.determinePosition().then((lo) {
-            initPo = l.LatLng(lo.latitude, lo.longitude);
-          });
-        }
-      });
+      getLocation.checkLocationPermission().then((value) {});
     });
   }
 
@@ -50,19 +45,26 @@ class _sports extends State<sports> {
     super.dispose();
     Get.delete<sportsTool>();
     stopController.startT();
-    getLocation.endGetLoAboutTime();
+    getLocation.stopMoveGetLo();
+    if (timer != null) {
+      timer?.cancel();
+      timer = null;
+    }
   }
+
+  Timer? timer;
 
   ///持续获取经纬度
   getLo() {
-    getLocation.startGetLoAboutTime(const Duration(seconds: 1), (value) {
-      routers.add(l.LatLng(
-          value['latitude']!.toDouble(), value['longitude']!.toDouble()));
-      data.update(['router', 'bt']);
-    });
+    getLocation.moveGetLo((value) {
+      routers.add(l.LatLng(value.latitude, value.longitude));
+
+      data.update(['router']);
+    }, onError: (value) {}, onDone: () {});
   }
 
   StopController stopController = StopController();
+  MapController mapcontroller = MapController();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -83,14 +85,17 @@ class _sports extends State<sports> {
                     boxShadow: [shadow.defaultShadow]),
                 child: Center(
                   child: customWidget.textBt('开始运动', onTap: () {
+                    ///获取移动经纬度
+                    getLo();
                     step = 1;
                     data.update(['sportPage']);
 
                     ///计时器
                     stopController.startT();
-
-                    ///获取移动经纬度
-                    getLo();
+                    getLocation.getCor().then((value) {
+                      mapcontroller.move(
+                          l.LatLng(value.latitude, value.longitude), 15);
+                    });
                   }),
                 ),
               ),
@@ -100,16 +105,9 @@ class _sports extends State<sports> {
                 GetBuilder<sportsTool>(
                   id: 'map',
                   builder: (controller) {
-                    if (initPo == null) {
-                      return const SizedBox(
-                        child: Center(
-                          child: TDText('获取经纬度异常'),
-                        ),
-                      );
-                    }
                     return FlutterMap(
+                      mapController: mapcontroller,
                       options: MapOptions(
-                        initialCenter: initPo!,
                         initialZoom: 8,
                       ),
                       children: [
@@ -132,7 +130,7 @@ class _sports extends State<sports> {
                             );
                           },
                         ),
-                        CurrentLocationLayer(),
+                        CurrentLocationLayer()
                       ],
                     );
                   },
@@ -156,7 +154,7 @@ class _sports extends State<sports> {
                                     itemCount: routers.length,
                                     itemBuilder: (context, index) {
                                       return Container(
-                                        padding: EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(5),
                                         child: TDText(
                                             '${routers[index].latitude}_${routers[index].longitude}'),
                                       );
@@ -209,7 +207,6 @@ class _sports extends State<sports> {
                             step = 2;
                             data.update(['sportPage']);
                             stopController.stopT();
-                            getLocation.endGetLoAboutTime();
                           },
                         )
                       ],

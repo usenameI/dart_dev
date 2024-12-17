@@ -16,6 +16,8 @@ dependencies:
   font_awesome_flutter: ^10.8.0
   flutter_map: ^7.0.2
   flutter_map_location_marker: ^9.1.1
+  # 前台服务
+  flutter_foreground_task: ^8.14.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

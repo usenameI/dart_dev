@@ -1,0 +1,24 @@
+ext {
+    compileSdkVersion = 34  // 或者更高版本
+    targetSdkVersion = 34  // 或者更高版本
+}
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+       // [required] background_fetch
+       maven { url "${project(':background_fetch').projectDir}/libs" }
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

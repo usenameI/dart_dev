@@ -25,8 +25,8 @@ class _login extends State<login> {
     super.initState();
 
     ///设置网球请求地址
-    apiConfig.internetAddress = 'http://192.168.1.4:86';
-    apiConfig.imageInter = 'http://192.168.1.4:86/assets/';
+    apiConfig.internetAddress = 'http://192.168.1.3:86';
+    apiConfig.imageInter = 'http://192.168.1.3:86/assets/';
   }
 
   var data = Get.put(loginTool());
