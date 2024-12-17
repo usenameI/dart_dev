@@ -4,6 +4,8 @@ import 'package:flame/input.dart';
 import 'package:flame_test/demo.dart';
 import 'package:flutter/material.dart';
 
+enum Direction { up, down, left, right }
+
 class ButtonComponent1 extends RectangleComponent with TapCallbacks {
   late final Paint _paint = Paint();
   bool _isPressed = false;
@@ -12,7 +14,9 @@ class ButtonComponent1 extends RectangleComponent with TapCallbacks {
   // TODO: implement paint
   Paint get paint => _paint;
 
-  ButtonComponent1() {
+  Direction direction;
+
+  ButtonComponent1({required this.direction}) {
     _paint
       ..color = Colors.red
       ..style = PaintingStyle.fill;
@@ -37,7 +41,23 @@ class ButtonComponent1 extends RectangleComponent with TapCallbacks {
   void onTapDown(TapDownEvent event) {
     // TODO: implement onTapDown
     super.onTapDown(event);
-    QController().moveRight();
+    switch (direction) {
+      case Direction.up:
+        QController().moveUp();
+        break;
+      case Direction.down:
+        // TODO: Handle this case.
+        QController().moveDown();
+        break;
+      case Direction.left:
+        // TODO: Handle this case.
+        QController().moveLeft();
+        break;
+      case Direction.right:
+        // TODO: Handle this case.
+        QController().moveRight();
+        break;
+    }
     _isPressed = true;
   }
 

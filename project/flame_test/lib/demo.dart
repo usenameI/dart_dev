@@ -25,16 +25,16 @@ class MyGame extends FlameGame {
     // button
     //   ..position = Vector2(100, 100)
     //   ..size = Vector2(200, 60);
-    up = ButtonComponent1()
+    up = ButtonComponent1(direction: Direction.up)
       ..size = btsize
       ..position = Vector2(size.x / 2 - 25, size.y - 170);
-    left = ButtonComponent1()
+    left = ButtonComponent1(direction: Direction.left)
       ..size = btsize
       ..position = Vector2(size.x / 2 - 75, size.y - 120);
-    right = ButtonComponent1()
+    right = ButtonComponent1(direction: Direction.right)
       ..size = btsize
       ..position = Vector2(size.x / 2 + 25, size.y - 120);
-    down = ButtonComponent1()
+    down = ButtonComponent1(direction: Direction.down)
       ..size = btsize
       ..position = Vector2(size.x / 2 - 25, size.y - 70);
     add(up);
@@ -86,30 +86,30 @@ class QController {
   var content;
 
   moveRight() {
-    square?.position.x += 100;
+    square?.position.x += 10;
     if (square!.position.x > content.size.x) {
       square?.position.x = -50;
     }
   }
 
   moveLeft() {
-    square?.position.x -= 100;
-    if (square!.position.x > content.size.x) {
-      square?.position.x = content.size.x + 50;
+    square?.position.x -= 10;
+    if (square!.position.x < -50) {
+      square?.position.x = content.size.x;
     }
   }
 
   moveUp() {
-    square?.position.x += 100;
-    if (square!.position.x > content.size.x) {
-      square?.position.x = -50;
+    square?.position.y -= 10;
+    if (square!.position.y < -50) {
+      square?.position.y = content.size.y;
     }
   }
 
   moveDown() {
-    square?.position.x += 100;
-    if (square!.position.x > content.size.x) {
-      square?.position.x = -50;
+    square?.position.y += 10;
+    if (square!.position.y > content.size.y + 50) {
+      square?.position.y = 0;
     }
   }
 }
