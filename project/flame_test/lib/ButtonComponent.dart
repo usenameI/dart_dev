@@ -1,10 +1,10 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/input.dart';
+import 'package:flame_test/Direction.dart';
 import 'package:flame_test/demo.dart';
 import 'package:flutter/material.dart';
 
-enum Direction { up, down, left, right }
+
 
 class ButtonComponent1 extends RectangleComponent with TapCallbacks {
   late final Paint _paint = Paint();
@@ -32,32 +32,46 @@ class ButtonComponent1 extends RectangleComponent with TapCallbacks {
     } else {
       _paint.color = Colors.red;
     }
-
     // Draw the rectangle (button)
     // canvas.drawRect(size.toRect().shift(position.toOffset()), _paint);
+  }
+
+  @override
+  void onTapCancel(TapCancelEvent event) {
+    // TODO: implement onTapCancel
+    super.onTapCancel(event);
+    QController().square.currentDir=null;
+    _isPressed = false;
+  }
+
+  @override
+  void onLongTapDown(TapDownEvent event) {
+    // TODO: implement onLongTapDown
+    super.onLongTapDown(event);
   }
 
   @override
   void onTapDown(TapDownEvent event) {
     // TODO: implement onTapDown
     super.onTapDown(event);
-    switch (direction) {
-      case Direction.up:
-        QController().moveUp();
-        break;
-      case Direction.down:
-        // TODO: Handle this case.
-        QController().moveDown();
-        break;
-      case Direction.left:
-        // TODO: Handle this case.
-        QController().moveLeft();
-        break;
-      case Direction.right:
-        // TODO: Handle this case.
-        QController().moveRight();
-        break;
-    }
+    QController().square.currentDir=direction;
+    // switch (direction) {
+    //   case Direction.up:
+    //     QController().square.moveUp();
+    //     break;
+    //   case Direction.down:
+    //     // TODO: Handle this case.
+    //     QController().square.moveDown();
+    //     break;
+    //   case Direction.left:
+    //     // TODO: Handle this case.
+    //     QController().square.moveLeft();
+    //     break;
+    //   case Direction.right:
+    //     // TODO: Handle this case.
+    //     QController().square.moveRight();
+    //     break;
+    // }
     _isPressed = true;
   }
 
@@ -65,6 +79,7 @@ class ButtonComponent1 extends RectangleComponent with TapCallbacks {
   void onTapUp(TapUpEvent event) {
     // TODO: implement onTapUp
     super.onTapUp(event);
+    QController().square.currentDir=null;
     _isPressed = false;
   }
 }

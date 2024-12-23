@@ -2,7 +2,9 @@ import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 
 import 'package:flame_test/ButtonComponent.dart';
-import 'package:flutter/material.dart';
+import 'package:flame_test/Direction.dart';
+import 'package:flame_test/MoveComponent.dart';
+
 
 class MyGame extends FlameGame {
   late final ButtonComponent1 up;
@@ -16,10 +18,10 @@ class MyGame extends FlameGame {
   @override
   Future<void> onLoad() async {
     super.onLoad();
-
-    QController().square = RectangleComponent()
-      ..size = Vector2(50, 50)
-      ..position = Vector2(100, 100);
+    QController().square=MoveComponent();
+      // QController().square.size=Vector2(50,50);
+      QController().square.position=Vector2(100,100);
+    
     add(QController().square as Component);
     QController().content = this;
     // button
@@ -82,34 +84,8 @@ class QController {
   factory QController() {
     return _instance;
   }
-  late final RectangleComponent? square;
+  late final  MoveComponent square;
   var content;
 
-  moveRight() {
-    square?.position.x += 10;
-    if (square!.position.x > content.size.x) {
-      square?.position.x = -50;
-    }
-  }
 
-  moveLeft() {
-    square?.position.x -= 10;
-    if (square!.position.x < -50) {
-      square?.position.x = content.size.x;
-    }
-  }
-
-  moveUp() {
-    square?.position.y -= 10;
-    if (square!.position.y < -50) {
-      square?.position.y = content.size.y;
-    }
-  }
-
-  moveDown() {
-    square?.position.y += 10;
-    if (square!.position.y > content.size.y + 50) {
-      square?.position.y = 0;
-    }
-  }
 }
