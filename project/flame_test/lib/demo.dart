@@ -1,13 +1,7 @@
 import 'dart:async';
-import 'dart:math';
-import 'dart:ui';
-
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
-
-import 'package:flame_test/ButtonComponent.dart';
-import 'package:flame_test/Direction.dart';
 import 'package:flame_test/MoveComponent.dart';
 import 'package:flutter/material.dart';
 
@@ -21,16 +15,17 @@ late final BackGroundLayer b;
   @override
   Future<void> onLoad() async {
     super.onLoad();
-            QController().square=MoveComponent();
-      QController().square.size=Vector2(50,50);
-      QController().square.position=Vector2(100,100);
-    //   children.add(QController().square as Component);
+    final image = await images.load('role.png');
+    QController().square=MoveComponent(sprite:Sprite(image));
+    QController().square.position=Vector2(100,100);
+    // children.add(QController().square as Component);
     // add(QController().square as Component);
     QController().content = this;
-    var backGroundLayer = BackGroundLayer(size: size,paint: Paint()..color=Colors.transparent,children: [QController().square]);
+    var backGroundLayer = BackGroundLayer(
+    size: size,
+    paint: Paint()..color=Colors.white,
+    children: [QController().square]);
     add(backGroundLayer);
-
-
 
   }
 
@@ -61,16 +56,13 @@ class BackGroundLayer extends RectangleComponent with TapCallbacks{
 @override
   FutureOr<void> onLoad() {
     // TODO: implement onLoad
-
     return super.onLoad();
-
   }
 
   @override
   void onTapDown(TapDownEvent event) {
     // TODO: implement onTapDown
     super.onTapDown(event);
-    
     QController().square.destination=event.localPosition;
 
   }
@@ -87,11 +79,13 @@ class QController {
 
   // 提供一个静态方法获取实例
   static QController get instance => _instance;
+
   factory QController() {
     return _instance;
   }
-  late final  MoveComponent square;
-  var content;
 
+  late final MoveComponent square;
+
+  var content;
 
 }

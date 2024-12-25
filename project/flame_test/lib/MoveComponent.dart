@@ -7,7 +7,7 @@ import 'package:flame_test/Direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-class MoveComponent extends RectangleComponent {
+class MoveComponent extends SpriteComponent {
   Vector2? parentSize;
   Direction? currentDir;
   ///move rection
@@ -16,15 +16,17 @@ class MoveComponent extends RectangleComponent {
   Vector2? destination;
 
 MoveComponent({
+    super.sprite,
+    super.autoResize,
+    super.paint,
     super.position,
     super.size,
     super.scale,
     super.angle,
+    super.nativeAngle,
     super.anchor,
     super.children,
     super.priority,
-    super.paint,
-    super.paintLayers,
     super.key,
   });
 
@@ -32,20 +34,20 @@ MoveComponent({
   @override
   FutureOr<void> onLoad() {
     // TODO: implement onLoad
-    size = Vector2(50, 50);
+    // size = Vector2(50, 50);
     
-      children.add(
-     AlignComponent(
-    alignment: Anchor.center,
-    child: TextComponent(text: '人',textRenderer: TextPaint(
-    style: const TextStyle(
-      color: Colors.white,
-      fontSize: 50
-    )
-  ))
-  )
-    );
-    paint.color=Colors.transparent;
+  //     children.add(
+  //    AlignComponent(
+  //   alignment: Anchor.center,
+  //   child: TextComponent(text: '人',textRenderer: TextPaint(
+  //   style: const TextStyle(
+  //     color: Colors.white,
+  //     fontSize: 50
+  //   )
+  // ))
+  // )
+  //   );
+  //   paint.color=Colors.transparent;
     return super.onLoad();
   }
 
